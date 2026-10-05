@@ -2,7 +2,7 @@
 
 ## Identity
 
-IDEA-038, RankReserve, rank-reserve, Intelligent Contracts. Status DESIGN.
+IDEA-038, RankReserve, rank-reserve, Intelligent Contracts. Status LIVE_VALIDATION.
 Target Studio Dev, chain 61997, RPC https://studio-next.genlayer.com/api.
 Public repository PENDING_PUBLICATION. Real lifecycle PENDING_EXECUTION.
 No app or frontend. The contract owns judgment, accounting and enforcement.
@@ -32,8 +32,8 @@ adjudication of meaning controlling the funded distribution.
 
 ## Mandatory gate matrix
 
-All fourteen admission findings were recorded before production code in the
-parent admission record. This public specification includes the rationale.
+All fourteen admission findings were recorded before production code.
+This specification includes the admission rationale; execution is separately gated.
 
 | Gate | Status | Reason |
 | --- | --- | --- |
@@ -176,7 +176,7 @@ model-specified amount, payee or rank. Total allocations+residual = actual reser
 | Any UNVERIFIABLE | RETRYABLE, append attempt only | Diagnose or wait expiry | No allocation or transfer |
 | Invalid output/technical failure | No mutation | Diagnose; do not assume attempt advanced | No movement |
 | Expiry | REFUNDED, pending reserve zero | Sponsor reads refund credit | Reserve -> sponsor credit |
-| Withdrawal | Own credit cleared once | Verify finalized child and native deltas | Credit -> own EOA |
+| Withdrawal | Own credit cleared once | Verify finalized execution, native deltas and any reported child | Credit -> own EOA |
 | Zero close | CLOSED | Stop new operations | No liability/value remaining |
 
 Ledger: total_received = total_locked + total_credits + total_withdrawn.
@@ -184,7 +184,7 @@ Each pool received = pool locked + pool credits + pool withdrawn. Nonnegative.
 Accepted semantic write commits ledger consequence; lifecycle tooling waits for
 successful FINALIZED and canonical reads. External EVM transfer is emitted after
 debit through the pinned EVM proxy, whose emit_transfer has no on parameter.
-Finalized parent and child plus exact native decrease and recipient/fee/child
+Finalized parent, any reported child, exact native decrease and recipient/fee
 receipt proof mandatory. A successful parent/zero ledger alone is insufficient.
 No cure/restore/appeal API; protocol appeals remain external protocol behavior.
 
@@ -196,7 +196,7 @@ No cure/restore/appeal API; protocol appeals remain external protocol behavior.
 | Senior/standard credits | Allocated reserve | Terminal pull liability | Each exact named creditor to own EOA | N/A: credit remains withdrawable forever | N/A | SETTLED/withdrawn/CLOSED | No double credit/withdraw; zero prevents close until withdrawn | claim/credit/accounting |
 | Rounding residual | Integer pro-rata division | Terminal sponsor credit | Sponsor own EOA | Same sponsor, no alternate destination | N/A | SETTLED/withdrawn/CLOSED | Calculated once; no actor/model-supplied destination | sponsor credit/pool/accounting |
 | Partial/no-ratification or unresolved reserve | Actual sponsor deposit | Pending until expiry | N/A: no unverified payee release | Whole unallocated reserve to sponsor credit | N/A | REFUNDED/withdrawn/CLOSED | Sponsor/time guard; duplicate refund rejects | pool/sponsor credit/accounting |
-| Emitted withdrawal | Debited terminal credit | Finalized child message | Sender's own EOA only | No automatic failed-child refund assumed | N/A | Successful child plus zero close | Never resend ambiguous transfer; read status/balance first | native balances, child receipt, credit |
+| Emitted withdrawal | Debited terminal credit | Finalized external message | Sender's own EOA only | No automatic failed-transfer refund assumed | N/A | Successful transfer plus zero close | Never resend ambiguous transfer; read status/balance first | exact native decrease, recipient/fee equation, any reported child receipt, credit |
 
 ## Reusable interface
 

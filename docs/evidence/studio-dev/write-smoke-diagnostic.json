@@ -1,0 +1,46 @@
+{
+  "mode": "UNSIGNED_SIMULATION",
+  "rpcErrorCode": -32000,
+  "executionResult": "ERROR",
+  "value": "2 GEN",
+  "contractErrors": [
+    "invalid future deadlines"
+  ],
+  "exceptionTypes": [],
+  "sourceLines": [],
+  "errorFieldNames": [
+    "code",
+    "message",
+    "data"
+  ],
+  "errorDataFieldNames": [
+    "receipt",
+    "params"
+  ],
+  "receiptFieldNames": [
+    "vote",
+    "execution_result",
+    "result",
+    "calldata",
+    "gas_used",
+    "mode",
+    "contract_state",
+    "contract_state_hash",
+    "node_config",
+    "eq_outputs",
+    "pending_transactions",
+    "genvm_result",
+    "processing_time",
+    "nondet_disagree",
+    "execution_stats"
+  ],
+  "runtimeCategories": [],
+  "accounting": {
+    "received": "0 GEN",
+    "locked": "0 GEN",
+    "credits": "0 GEN",
+    "withdrawn": "0 GEN",
+    "invariant": true
+  },
+  "nativeBalance": "0 GEN"
+}

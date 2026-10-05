@@ -1,0 +1,29 @@
+name: Contract verification
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: windows-latest
+    env:
+      PYTHONUTF8: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install pinned tooling
+        shell: pwsh
+        run: |
+          python -m venv .venv
+          .venv/Scripts/python.exe -m pip install -r requirements-dev.txt
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          npm ci --ignore-scripts
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Verify contract and tooling
+        shell: pwsh
+        run: npm run check

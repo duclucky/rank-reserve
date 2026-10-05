@@ -1,0 +1,22 @@
+{
+  "mode": "UNSIGNED_SIMULATION",
+  "explicitSimulationClock": true,
+  "rpcErrorCode": null,
+  "executionResult": "SUCCESS",
+  "value": "2 GEN",
+  "contractErrors": [],
+  "exceptionTypes": [],
+  "sourceLines": [],
+  "errorFieldNames": [],
+  "errorDataFieldNames": [],
+  "receiptFieldNames": [],
+  "runtimeCategories": [],
+  "accounting": {
+    "received": "0 GEN",
+    "locked": "0 GEN",
+    "credits": "0 GEN",
+    "withdrawn": "0 GEN",
+    "invariant": true
+  },
+  "nativeBalance": "0 GEN"
+}
