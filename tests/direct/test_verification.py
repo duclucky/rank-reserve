@@ -21,7 +21,7 @@ def test_malicious_leader_cannot_pass_semantic_validator(payload,setup):
     before=snapshot(c);assert vm.run_validator(leader_result=payload) is False
     assert snapshot(c)==before
 
-@pytest.mark.parametrize("raw", ['null','[]','broken','{"classes":{"pool:0":"PRIORITY","pool:0":"STANDARD","pool:1":"STANDARD"}}'])
+@pytest.mark.parametrize("raw", ['null','[]','broken','{"classes":{"pool:0":"PRIORITY","pool:0":"STANDARD","pool:1":"STANDARD"}}', '{"classes":{"pool:0":{"class":"UNVERIFIABLE"},"pool:1":"STANDARD"}}', '{"classes":{"pool:0":"UNVERIFIABLE","pool:1":{"class":"STANDARD"}}}', '{"classes":["UNVERIFIABLE","STANDARD"]}'])
 def test_malformed_or_duplicate_json_no_mutation(raw,setup):
     c,vm,owner,a,b=setup;ratify(c,vm,a,b);vm.clear_mocks();vm.mock_llm(r'(?s).*RankReserve meaning judge.*',json.dumps(raw));vm.sender=owner
     before=snapshot(c)

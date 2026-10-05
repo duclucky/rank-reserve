@@ -78,7 +78,7 @@ async function main() {
       }
       pool=await read('get_pool',[id]);
     }
-    if(name!=='expiry'&&pool.phase==='READY'&&pool.attempts===0) {
+    if(name!=='expiry'&&pool.phase==='READY'&&pool.attempts===0&&Math.floor(Date.now()/1000)<pool.review_deadline) {
       await write(`${name}:review`,'sponsor','review_pool',[id]);pool=await read('get_pool',[id]);
     }
     if(name!=='expiry'&&pool.attempts>0&&!item.judgment) {
@@ -134,6 +134,7 @@ async function main() {
     item.finalPool=await read('get_pool',[id]);guard(item.finalPool.phase==='CLOSED'&&item.finalPool.locked==='0 GEN'&&item.finalPool.credits==='0 GEN','CLOSED_ZERO_LIABILITY_REQUIRED');persist();
   }
   const accounting=await read('get_accounting');const nativeBalance=gen(await publicClient.getBalance({address}));
+  guard(['senior','equal','unverifiable'].every(name=>state.pools[name]?.judgment),'ALL_REQUIRED_JUDGMENTS_MUST_BE_PROVED');
   guard(accounting.invariant&&accounting.received==='8 GEN'&&accounting.withdrawn==='8 GEN'&&accounting.locked==='0 GEN'&&accounting.credits==='0 GEN'&&nativeBalance==='0 GEN','FINAL_ZERO_NATIVE_ACCOUNTING_REQUIRED');
   saveJson(EVIDENCE,{command:'node scripts/lifecycle.mjs',checkedAt:new Date().toISOString(),network:'Studio Dev',chainId:CHAIN,contractAddress:address,sourceSha256:sourceHash(),roles:Object.fromEntries(Object.entries(roles).map(([role,a])=>[role,a.address])),reservePerCase:'2 GEN',pools:state.pools,transactions:state.transactions,accounting,nativeBalance,evidenceIsSanitized:true});
   console.log(JSON.stringify({stage:'LIFECYCLE_PASS',cases:4,accounting,nativeBalance}));

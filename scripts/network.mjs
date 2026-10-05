@@ -66,9 +66,10 @@ export async function measuredFees(client,address,functionName,args,value,messag
   const envelope=await response.json();
   if(envelope.error||envelope.result?.execution_result!=='SUCCESS') {
     const receipt=envelope.result??envelope.error?.data?.receipt;
-    const text=typeof receipt?.result==='string'?Buffer.from(receipt.result,'base64').toString('utf8'):'';
+    const text=(typeof receipt?.result==='string'?Buffer.from(receipt.result,'base64').toString('utf8'):'')+' '+JSON.stringify(receipt?.genvm_result??{});
     const categories=['AttributeError','TypeError','NameError','ValueError','UserError','InsufficientFees','BudgetTooLow','MessageAllocationsNotEqualBudget','AllocationTreeMalformed','AllocationLifecycleBudgetInsufficient','AllocationTreeBudgetInconsistent','AllocationSubtreeMismatch','AllocationDuplicateKey','AllocationTreeTooDeep','ExternalAllocationInvalid','InvalidFeeParams','MessageNoMatchingAllocation','MessageEmissionPhaseMismatch','MessageFeeParamsMismatch','insufficient','allocation','budget','not expired','no credit','withdraw state'].filter(word=>(text+' '+String(envelope.error?.message??'')).toLowerCase().includes(word.toLowerCase()));
-    console.log(JSON.stringify({stage:'FEE_SIMULATION_ERROR',method:functionName,executionResult:receipt?.execution_result??'UNKNOWN',rpcErrorCode:envelope.error?.code??null,categories}));
+    const knownErrors=['review expired','bad leader result','invalid semantic output','invalid verdict','output schema','classes coverage','invalid class','duplicate JSON key','invalid JSON','invalid future deadlines','nondet','timeout','deadline','claim IDs','UTF','Json','Unicode','parser','eq_principle','invalid','error','assert','failed','Overflow','out of','time units','gas','memory'];
+    console.log(JSON.stringify({stage:'FEE_SIMULATION_ERROR',method:functionName,executionResult:receipt?.execution_result??'UNKNOWN',rpcErrorCode:envelope.error?.code??null,categories,knownErrors:knownErrors.filter(word=>text.toLowerCase().includes(word.toLowerCase()))}));
   }
   guard(response.ok&&!envelope.error&&envelope.result?.execution_result==='SUCCESS','TIMESTAMPED_FEE_SIMULATION_FAILED');
   const receipt=envelope.result;
