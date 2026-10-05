@@ -2,6 +2,7 @@
 import path from 'node:path';
 import crypto from 'node:crypto';
 import {safeReceipt} from './receipts.mjs';
+import {settledTransferFee} from './transfer-fees.mjs';
 import {ROOT,DEPLOYMENT,CHAIN,context,sourceHash,gen,amount,addressArg,guard,report,loadJson,saveJson,view} from './network.mjs';
 async function main() {
   const d=loadJson(DEPLOYMENT);const lifecycle=loadJson(path.join(ROOT,'docs/evidence/studio-dev/lifecycle.json'));
@@ -32,8 +33,8 @@ async function main() {
       guard(safe.status==='FINALIZED'&&safe.executionResult==='SUCCESS','WITHDRAWAL_RECEIPT_REQUIRED');
       const fee=tx.data?.fee_accounting??tx.fee_accounting;
       guard(fee?.status==='settled'&&fee.paid_fee_value!==undefined&&fee.total_refunded!==undefined,'SETTLED_FEE_PROOF_REQUIRED');
-      const charged=BigInt(fee.paid_fee_value)-BigInt(fee.total_refunded);
-      guard(charged>=0n&&amount(proof.amount)-amount(proof.recipientNetIncrease)===charged,'EXACT_RECIPIENT_FEE_EQUATION_REQUIRED');
+      const reconciled=settledTransferFee(fee,proof.recipient);
+      guard(amount(proof.amount)-amount(proof.recipientNetIncrease)===reconciled.netCharged,'EXACT_RECIPIENT_FEE_EQUATION_REQUIRED');
       guard(amount(proof.nativeBefore)-amount(proof.nativeAfter)===amount(proof.amount)&&proof.nativeDecrease===proof.amount,'EXACT_NATIVE_DECREASE_REQUIRED');
       const message=tx.messages?.find(m=>String(m.recipient).toLowerCase()===proof.recipient.toLowerCase()&&BigInt(m.value)===amount(proof.amount));guard(message,'EXACT_RECIPIENT_MESSAGE_REQUIRED');
       const childIds=await publicClient.getTriggeredTransactionIds({hash});
@@ -42,7 +43,7 @@ async function main() {
         const childReceipt=safeReceipt(await publicClient.getTransaction({hash:child.transactionHash}),child.transactionHash);
         guard(childReceipt.status==='FINALIZED'&&childReceipt.executionResult==='SUCCESS','FINALIZED_CHILD_REQUIRED');
       }
-      withdrawals.push({case:name,role,parentReceipt:safe,recipient:proof.recipient,amount:proof.amount,nativeBefore:proof.nativeBefore,nativeAfter:proof.nativeAfter,nativeDecrease:proof.nativeDecrease,recipientBefore:proof.recipientBefore,recipientAfter:proof.recipientAfter,recipientNetIncrease:proof.recipientNetIncrease,fee:{status:'settled',paid:gen(fee.paid_fee_value),refunded:gen(fee.total_refunded),charged:gen(charged)},equation:'recipient net increase + settled charged fee = transfer amount',message:{recipient:proof.recipient,value:gen(message.value)},childReceipts:proof.childReceipts,childBoundary:proof.childBoundary});
+      withdrawals.push({case:name,role,parentReceipt:safe,recipient:proof.recipient,amount:proof.amount,nativeBefore:proof.nativeBefore,nativeAfter:proof.nativeAfter,nativeDecrease:proof.nativeDecrease,recipientBefore:proof.recipientBefore,recipientAfter:proof.recipientAfter,recipientNetIncrease:proof.recipientNetIncrease,fee:reconciled.proof,equation:'recipient net increase + paid fee - total refunded - separate recipient external fee payout = transfer amount',message:{recipient:proof.recipient,value:gen(message.value)},childReceipts:proof.childReceipts,childBoundary:proof.childBoundary});
     }
   }
   for(const [step,stored] of Object.entries(lifecycle.transactions)) {
