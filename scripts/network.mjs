@@ -3,8 +3,10 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
-import { createAccount, createClient } from 'genlayer-js';
+import { createAccount, createClient, abi, normalizeMessageFeeAllocations } from 'genlayer-js';
 import { studioDevnet } from 'genlayer-js/chains';
+import {CalldataAddress} from 'genlayer-js/types';
+import {hexToBytes} from 'viem';
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const RPC = 'https://studio-next.genlayer.com/api';
 export const CHAIN = 61997;
@@ -22,6 +24,7 @@ export function commit() { return execFileSync('git', ['rev-parse','HEAD'], {cwd
 export function dirty() { return !!execFileSync('git',['status','--porcelain'],{cwd:ROOT,encoding:'utf8'}).trim(); }
 export function gen(value) { const n=BigInt(value); const f=n%GEN; return `${n/GEN}${f ? '.'+f.toString().padStart(18,'0').replace(/0+$/,'') : ''} GEN`; }
 export function amount(text) { guard(/^\d+(\.\d{1,18})? GEN$/.test(text),'INVALID_GEN_VIEW'); const [w,f='']=text.slice(0,-4).split('.'); return BigInt(w)*GEN+BigInt(f.padEnd(18,'0')); }
+export function addressArg(address) { guard(/^0x[0-9a-fA-F]{40}$/.test(address),'INVALID_ADDRESS_ARGUMENT'); return new CalldataAddress(hexToBytes(address)); }
 export function accounts() {
   const values={};
   for(const file of [path.join(ROOT,'.env'),path.resolve(ROOT,'..','.env')]) {
@@ -52,3 +55,22 @@ export async function context(withAccounts=true) {
   return {roles,clients,publicClient};
 }
 export async function view(client,address,functionName,args=[]) { return client.readContract({address,functionName,args,transactionHashVariant:'latest-final'}); }
+export async function measuredFees(client,address,functionName,args,value,messageAllocations) {
+  // Studio's unsigned write simulation omits canonical transaction time by default.
+  // Bind only the profiling simulation to the actual current time; signed writes
+  // use the network transaction timestamp and never carry sim_config.
+  const baseline=await client.estimateTransactionFees(messageAllocations?{messageAllocations}:{});
+  const data=abi.transactions.serialize([abi.calldata.encode(abi.calldata.makeCalldataObject(functionName,args)),false]);
+  const request={type:'write',to:address,from:client.account.address,data,value:'0x'+value.toString(16),sim_config:{genvm_datetime:new Date().toISOString()},fees:{distribution:baseline.distribution,feeValue:baseline.feeValue,...(baseline.messageAllocations?{messageAllocations:normalizeMessageFeeAllocations(baseline.messageAllocations)}:{})}};
+  const response=await fetch(RPC,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:1,method:'sim_call',params:[request]},(key,item)=>typeof item==='bigint'?item.toString():item),signal:AbortSignal.timeout(55000)});
+  const envelope=await response.json();
+  if(envelope.error||envelope.result?.execution_result!=='SUCCESS') {
+    const receipt=envelope.result??envelope.error?.data?.receipt;
+    const text=typeof receipt?.result==='string'?Buffer.from(receipt.result,'base64').toString('utf8'):'';
+    const categories=['AttributeError','TypeError','NameError','ValueError','UserError','InsufficientFees','BudgetTooLow','MessageAllocationsNotEqualBudget','AllocationTreeMalformed','AllocationLifecycleBudgetInsufficient','AllocationTreeBudgetInconsistent','AllocationSubtreeMismatch','AllocationDuplicateKey','AllocationTreeTooDeep','ExternalAllocationInvalid','InvalidFeeParams','MessageNoMatchingAllocation','MessageEmissionPhaseMismatch','MessageFeeParamsMismatch','insufficient','allocation','budget','not expired','no credit','withdraw state'].filter(word=>(text+' '+String(envelope.error?.message??'')).toLowerCase().includes(word.toLowerCase()));
+    console.log(JSON.stringify({stage:'FEE_SIMULATION_ERROR',method:functionName,executionResult:receipt?.execution_result??'UNKNOWN',rpcErrorCode:envelope.error?.code??null,categories}));
+  }
+  guard(response.ok&&!envelope.error&&envelope.result?.execution_result==='SUCCESS','TIMESTAMPED_FEE_SIMULATION_FAILED');
+  const receipt=envelope.result;
+  return client.estimateTransactionFeesFromSimulation({simulation:{receipt,feeAccounting:receipt.genvm_result?.fee_accounting,feeReport:receipt.genvm_result?.fee_accounting?.execution_fee_report},...(messageAllocations?{messageAllocations}:{})});
+}

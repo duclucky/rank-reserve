@@ -1,7 +1,7 @@
 import path from 'node:path';
 import { CALL_KEY_UNNAMED,MessageType,encodeExternalMessageFeeParams } from 'genlayer-js';
 import {safeReceipt} from './receipts.mjs';
-import {ROOT,DEPLOYMENT,CHAIN,GEN,context,sourceHash,gen,amount,guard,report,loadJson,saveJson,view} from './network.mjs';
+import {ROOT,DEPLOYMENT,CHAIN,GEN,context,sourceHash,gen,amount,guard,report,loadJson,saveJson,view,measuredFees,addressArg} from './network.mjs';
 const STATE=path.join(ROOT,'.local/lifecycle.json');
 const EVIDENCE=path.join(ROOT,'docs/evidence/studio-dev/lifecycle.json');
 const CHARTER='Restoring an unavailable existing production service is PRIORITY. Adding optional new features is STANDARD. Insufficient or conflicting descriptions are UNVERIFIABLE.';
@@ -13,7 +13,22 @@ async function main() {
   guard(state.contractAddress===address,'LIFECYCLE_IDENTITY_MISMATCH');
   const persist=()=>saveJson(STATE,state);
   const read=async(method,args=[])=>JSON.parse(String(await view(publicClient,address,method,args)));
-  const credit=async(pool,role)=>amount(String(await view(publicClient,address,'get_credit',[pool,roles[role].address])));
+  const credit=async(pool,role)=>amount(String(await view(publicClient,address,'get_credit',[pool,addressArg(roles[role].address)])));
+  async function waitCanonical(method,key,role) {
+    const id=state.pools[key.split(':')[0]].id;
+    for(let attempt=0;attempt<20;attempt++) {
+      let applied=false;
+      try {
+        if(method==='create_pool')applied=(await read('get_pool_ids')).includes(id);
+        else if(method==='ratify_claim')applied=(await read('get_claim',[id,role==='alice'?0:1])).ratified;
+        else if(method==='withdraw_credit')applied=await credit(id,role)===0n;
+        else {const p=await read('get_pool',[id]);applied=method==='review_pool'?p.attempts>0&&['SETTLED','RETRYABLE'].includes(p.phase):method==='expire_pool'?p.phase==='REFUNDED':method==='close_pool'&&p.phase==='CLOSED';}
+      }catch{}
+      if(applied)return;
+      await new Promise(resolve=>setTimeout(resolve,2000));
+    }
+    guard(false,'FINALIZED_CANONICAL_APPLICATION_NOT_OBSERVED');
+  }
   async function finishPending() {
     if(!state.pending)return;
     const {hash,key,role,method,feeDeposit}=state.pending;
@@ -22,6 +37,7 @@ async function main() {
     state.transactions[key]={role,method,feeDeposit,...safe};persist();
     console.log(JSON.stringify({stage:'FINALIZED_OR_RECOVERED',step:key,...safe}));
     guard(safe.status==='FINALIZED'&&safe.executionResult==='SUCCESS','LIFECYCLE_EXECUTION_FAILED');
+    await waitCanonical(method,key,role);
     state.pending=null;persist();
   }
   await finishPending();
@@ -29,7 +45,7 @@ async function main() {
     guard(!state.transactions[key],'DUPLICATE_STEP_REFUSED');
     const c=clients[role];
     const allocations=method==='withdraw_credit'?[{messageType:MessageType.External,recipient:roles[role].address,callKey:CALL_KEY_UNNAMED,budget:42000n,feeParams:encodeExternalMessageFeeParams({gasLimit:21000n,maxGasPrice:2n})}]:undefined;
-    const quote=await c.estimateTransactionFeesForWrite({address,functionName:method,args,value,...(allocations?{messageAllocations:allocations}:{})});
+    const quote=await measuredFees(c,address,method,args,value,allocations);
     guard(await c.getBalance({address:roles[role].address})>=value+quote.feeValue,'ACTOR_BALANCE_BELOW_MEASURED_FEE');
     const hash=await c.writeContract({address,functionName:method,args,value,fees:{distribution:quote.distribution,feeValue:quote.feeValue,...(quote.messageAllocations?.length?{messageAllocations:quote.messageAllocations}:{})}});
     state.pending={key,role,method,hash,feeDeposit:gen(quote.feeValue)};persist();
@@ -64,6 +80,8 @@ async function main() {
     }
     if(name!=='expiry'&&pool.phase==='READY'&&pool.attempts===0) {
       await write(`${name}:review`,'sponsor','review_pool',[id]);pool=await read('get_pool',[id]);
+    }
+    if(name!=='expiry'&&pool.attempts>0&&!item.judgment) {
       item.judgment=await read('get_attempt',[id,pool.attempts]);
       item.claims=await Promise.all([0,1].map(i=>read('get_claim',[id,i])));item.afterReview=pool;persist();
       const tx=await publicClient.getTransaction({hash:state.transactions[`${name}:review`].transactionHash});

@@ -8,8 +8,9 @@ try {
   if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
   & "$taskRoot/.venv/Scripts/gltest.exe" tests/ -q --tb=short
   if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-  if (Test-Path tests/deployment/receipts.test.mjs) {
-    & node --test tests/deployment/receipts.test.mjs
+  if (Test-Path tests/deployment) {
+    $testFiles = @(Get-ChildItem tests/deployment -Filter '*.test.mjs' | ForEach-Object { $_.FullName })
+    & node --test $testFiles
     if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
   }
   foreach ($file in Get-ChildItem scripts -Filter '*.mjs') {

@@ -92,4 +92,3 @@ def direct_deploy(direct_vm):
         return deploy_contract(path, direct_vm, *args, sdk_version=sdk_version, **kwargs)
 
     return _deploy
-
