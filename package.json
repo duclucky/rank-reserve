@@ -1,0 +1,11 @@
+{
+  "name": "rank-reserve",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "check": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/check.ps1",
+    "test:direct": ".venv\\Scripts\\gltest.exe tests/direct -q",
+    "lint:contracts": ".venv\\Scripts\\python.exe scripts/genvm_lint_rc.py check contracts/rank_reserve.py"
+  },
+  "devDependencies": { "genlayer-js": "2.0.0-rc.1" }
+}
