@@ -140,17 +140,19 @@ face amounts, reserve, authority or destination rules. Model never supplies thes
 Leader captures all state into bounded immutable locals before nondeterminism.
 Prompt treats scope and charter as constitutive interpretation input, explicitly
 excludes factual debt/work verification, lists exact claim IDs and all three enums.
-Model returns classes mapping every expected ID exactly once plus optional reason.
+Model returns JSON text with classes mapping every expected ID exactly once plus optional reason.
+Use response_format=text to preserve duplicate keys; the pinned SDK's JSON mode
+parses before contract normalization and would otherwise hide duplicate keys.
 Normalization rejects extra/missing/duplicate semantic IDs, invalid classes, unknown
 consequence fields (payout/payee/amount/rank) or unsupported coverage. The expected
 IDs and coverage are code-derived. Optional prose is discarded from equivalence
-and truncated only for noncritical stored explanation; prose cannot fail consensus.
+and discarded rather than stored; prose cannot fail consensus.
 
 | Critical field | Bounds | Comparison rule | Why critical |
 | --- | --- | --- | --- |
 | Class vector | 2-4 fixed IDs; PRIORITY/STANDARD/UNVERIFIABLE | Independent replay compares normalized tuple per canonical ID | Determines tier waterfall |
 | Coverage/identity | Full exact canonical IDs, no duplicates | Deterministic validation before comparison/settlement | No extra or missing creditor |
-| Rationale | Optional bounded stored text | Ignored in equivalence | Wording changes no right/value |
+| Rationale | Optional text within the bounded raw answer | Discarded; ignored in equivalence | Wording changes no right/value |
 
 Validator returns False unless candidate is gl.vm.Return. It independently reruns
 the same prompt and normalizes its own answer; malformed output or meaning mismatch
@@ -180,8 +182,9 @@ model-specified amount, payee or rank. Total allocations+residual = actual reser
 Ledger: total_received = total_locked + total_credits + total_withdrawn.
 Each pool received = pool locked + pool credits + pool withdrawn. Nonnegative.
 Accepted semantic write commits ledger consequence; lifecycle tooling waits for
-successful FINALIZED and canonical reads. External EVM transfer is emitted on
-finalized, after debit. Exact native contract decrease plus recipient/fee/child
+successful FINALIZED and canonical reads. External EVM transfer is emitted after
+debit through the pinned EVM proxy, whose emit_transfer has no on parameter.
+Finalized parent and child plus exact native decrease and recipient/fee/child
 receipt proof mandatory. A successful parent/zero ledger alone is insufficient.
 No cure/restore/appeal API; protocol appeals remain external protocol behavior.
 
