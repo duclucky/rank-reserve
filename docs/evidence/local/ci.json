@@ -1,0 +1,8 @@
+{
+  "command": "gh run view 37393899063 --json status,conclusion,headSha,url",
+  "at": "2026-10-06T00:31:13.734Z",
+  "conclusion": "success",
+  "headSha": "aed56990d2738344d79232538919b06518ade35d",
+  "status": "completed",
+  "url": "https://github.com/duclucky/rank-reserve/actions/runs/37393899063"
+}
