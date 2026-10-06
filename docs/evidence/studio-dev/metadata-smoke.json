@@ -1,0 +1,54 @@
+{
+  "command": "node scripts/metadata-smoke.mjs",
+  "mode": "UNSIGNED_METADATA_SMOKE",
+  "at": "2026-10-05T23:56:43.490Z",
+  "chainId": 61997,
+  "contractAddress": "0x5cE19ec2f4be4fdfE86D6Ea152396d8b1787e1Df",
+  "hasConstructor": true,
+  "metadata": {
+    "create_pool": {
+      "readonly": false,
+      "payable": true
+    },
+    "ratify_claim": {
+      "readonly": false,
+      "payable": false
+    },
+    "review_pool": {
+      "readonly": false,
+      "payable": false
+    },
+    "expire_pool": {
+      "readonly": false,
+      "payable": false
+    },
+    "withdraw_credit": {
+      "readonly": false,
+      "payable": false
+    },
+    "close_pool": {
+      "readonly": false,
+      "payable": false
+    }
+  },
+  "nonpayableValue": "1 GEN",
+  "executionResult": "ERROR",
+  "rejectedNonpayable": true,
+  "accountingBefore": {
+    "received": "0 GEN",
+    "locked": "0 GEN",
+    "credits": "0 GEN",
+    "withdrawn": "0 GEN",
+    "invariant": true
+  },
+  "accountingAfter": {
+    "received": "0 GEN",
+    "locked": "0 GEN",
+    "credits": "0 GEN",
+    "withdrawn": "0 GEN",
+    "invariant": true
+  },
+  "nativeBefore": "2 GEN",
+  "nativeAfter": "2 GEN",
+  "noTransactionSubmitted": true
+}

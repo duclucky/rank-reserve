@@ -48,22 +48,35 @@ then reload canonical views. Consensus status alone does not prove execution suc
 
 NETWORK = Studio Dev; chain ID 61997.
 
-CONTRACT_ADDRESS = `0x2Db6F44BFc8A9e296c463e54cB437a28Ad3892B6`.
+CONTRACT_ADDRESS = `0x5cE19ec2f4be4fdfE86D6Ea152396d8b1787e1Df`.
 
-[Contract explorer](https://explorer-studio-dev.genlayer.com/address/0x2Db6F44BFc8A9e296c463e54cB437a28Ad3892B6)
-and [deployment transaction](https://explorer-studio-dev.genlayer.com/transactions/0xa621bf002261fc19f09774e3b330f49cb4e881feae12791497445915dd362474).
-This revision is SUPERSEDED_RECOVERED after clarifying the enum-only output schema.
-All 8 GEN were withdrawn and its four pools closed; native balance is 0 GEN.
-The [archived identity and recovery](docs/evidence/studio-dev/superseded/revision-179817e.json)
-records successful deployment and the incomplete judgment honestly. Replacement
-deployment and full lifecycle verification are pending.
+[Contract explorer](https://explorer-studio-dev.genlayer.com/address/0x5cE19ec2f4be4fdfE86D6Ea152396d8b1787e1Df)
+and [deployment transaction](https://explorer-studio-dev.genlayer.com/transactions/0x84b3ce67e91f385ab82cd3acaea8d44d5d7a4091b67efddf5bf403d646ff845b).
+Result: SUCCESS; Status: FINALIZED. Exact deployed source matches source commit
+463918c444006bedfe57b340ec00a207cd9da250; schema recognizes 6 writes and 6 views.
+The [deployment identity](docs/evidence/studio-dev/deployment.json) binds source,
+runner, network and address. Both explorer URLs returned HTTP 200.
+The [superseded revision](docs/evidence/studio-dev/superseded/revision-179817e.json)
+was fully recovered: all 8 GEN withdrawn, four pools CLOSED, native balance 0 GEN.
 
-Illustrative example, pending finalized worked-example verification: a 2 GEN
-reserve backs two 2 GEN faces. Under a charter prioritizing restoration of an
-unavailable production service, restoring authentication is PRIORITY and adding
-optional dashboard themes is STANDARD. Expected credits are 2 GEN and 0 GEN.
-Two PRIORITY promises with equal faces receive 1 GEN each.
-Full lifecycle and recovery evidence is still PENDING_EXECUTION.
+Real finalized worked examples: each pool holds a 2 GEN reserve against two
+2 GEN faces. The immutable charter prioritizes restoration of an unavailable
+existing production service over optional new features. Named payees ratified
+the full definition before each review. All three reviews used five validators,
+leaderOnly=false and MAJORITY_AGREE.
+
+| Case | Finalized meaning | Result |
+| --- | --- | --- |
+| Restore authentication / add themes | PRIORITY / STANDARD | 2 GEN / 0 GEN credits; withdrawal proved; CLOSED |
+| Restore authentication / restore data access | PRIORITY / PRIORITY | 1 GEN each; both withdrawals proved; CLOSED |
+| No ratification | No judgment | Expiry refunded sponsor 2 GEN; withdrawal proved; CLOSED |
+| Unspecified activity in absent annex / add themes | UNVERIFIABLE / STANDARD | RETRYABLE with 2 GEN locked and 0 GEN credits; expired, refunded, withdrawn and CLOSED |
+
+Full lifecycle: PASS_EXECUTION. Read-only verification confirms 25 successful
+finalized receipts, five exact native withdrawals, 8 GEN received and withdrawn,
+zero locked/credit liabilities and native balance 0 GEN. See
+[lifecycle evidence](docs/evidence/studio-dev/lifecycle.json) and
+[fresh re-verification](docs/evidence/studio-dev/reverification.json).
 
 ## Verification and tooling
 

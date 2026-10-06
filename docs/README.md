@@ -2,9 +2,9 @@
 
 ## Identity
 
-IDEA-038, RankReserve, rank-reserve, Intelligent Contracts. Status LIVE_VALIDATION.
+IDEA-038, RankReserve, rank-reserve, Intelligent Contracts. Status VALIDATED.
 Target Studio Dev, chain 61997, RPC https://studio-next.genlayer.com/api.
-Public repository PENDING_PUBLICATION. Real lifecycle PENDING_EXECUTION.
+Public repository PENDING_PUBLICATION. Real lifecycle PASS_EXECUTION.
 No app or frontend. The contract owns judgment, accounting and enforcement.
 
 ## One-sentence product hook
@@ -49,7 +49,7 @@ This specification includes the admission rationale; execution is separately gat
 | Contract count | PASS_ADMISSION | One necessary reserve/judgment/enforcement state owner |
 | Differentiation | PASS_ADMISSION | Priority waterfall, not debt netting, bid ranking or execution grants |
 | Claim-to-code | PASS_ADMISSION | Complete planned matrix below |
-| Full lifecycle | PASS_ADMISSION / PENDING_EXECUTION | All acceptance branches specified; live evidence required |
+| Full lifecycle | PASS_ADMISSION / PASS_EXECUTION | Four finalized lifecycle/recovery cases, five exact value exits and zero native balance; evidence/studio-dev/reverification.json |
 | Scope honesty | PASS_ADMISSION | Constitutive escrow promises, no external debt/service/legal proof |
 
 ## Actors, roles and incentives
@@ -140,7 +140,7 @@ face amounts, reserve, authority or destination rules. Model never supplies thes
 Leader captures all state into bounded immutable locals before nondeterminism.
 Prompt treats scope and charter as constitutive interpretation input, explicitly
 excludes factual debt/work verification, lists exact claim IDs and all three enums.
-Model returns JSON text with classes mapping every expected ID exactly once plus optional reason.
+Model returns JSON text with classes mapping every expected ID exactly once to a plain enum string, plus optional top-level reason. Nested class objects reject.
 Use response_format=text to preserve duplicate keys; the pinned SDK's JSON mode
 parses before contract normalization and would otherwise hide duplicate keys.
 Normalization rejects extra/missing/duplicate semantic IDs, invalid classes, unknown
@@ -227,11 +227,11 @@ target smoke and finalized lifecycle required. No critical test skip permitted.
 
 | Claim | Contract method/state | View/read | Test | Network evidence |
 | --- | --- | --- | --- | --- |
-| Co-ratified immutable promises | create_pool/ratify_claim, digest/readiness | pool/claim | roles/digest/replay/immutability | Planned creation and each ratification receipt+reads; PENDING_EXECUTION |
-| Meaning controls seniority | review_pool/full classes/attempts | attempt/claim/pool | independent replay, disagreement/prose invariance | Planned finalized judgment and canonical vector; PENDING_EXECUTION |
-| Capped proportional waterfall | review_pool/private allocation/credit | credit/accounting | senior/equal, face cap, residual, no double settlement | Planned 2 GEN senior and equal cases; PENDING_EXECUTION |
-| Safe expiry/refund | expire_pool | pool/sponsor credit | wrong role/state/time -1/0/+1, partial assent | Planned expiry recovery receipt/read; PENDING_EXECUTION |
-| Real withdrawal and zero closure | withdraw_credit/close_pool | credit/pool/accounting | wrong role/state/double/open-liability, EVM boundary | Planned exact native decrease, recipient/fee/child proof; PENDING_EXECUTION |
+| Co-ratified immutable promises | create_pool/ratify_claim, digest/readiness | pool/claim | test_authenticated_ratification_tripwire; test_creation_and_immutable_definition | lifecycle.json: senior/equal/unverifiable creation and six ratification receipts; re-verification canonical claims |
+| Meaning controls seniority | review_pool/full classes/attempts | attempt/claim/pool | test_actual_validator_replays_meaning_and_ignores_prose; malicious leader cases | reverification.json: three reviews, 5 validators/MAJORITY_AGREE, exact class vectors |
+| Capped proportional waterfall | review_pool/private allocation/credit | credit/accounting | test_semantic_classes_drive_waterfall; test_isolation_and_capped_proportional_residual | lifecycle.json: senior 2 GEN/0 GEN; equal 1 GEN each; canonical allocated fields |
+| Safe expiry/refund | expire_pool | pool/sponsor credit | test_expiry_clock_and_no_double_refund; test_unverifiable_history_retry_bound_and_no_credit | lifecycle.json: unratified and UNVERIFIABLE cases each refund 2 GEN, zero allocation before expiry |
+| Real withdrawal and zero closure | withdraw_credit/close_pool | credit/pool/accounting | test_withdraw_exact_own_credit_zero_close_and_duplicates; test_withdraw_emits_exact_evm_recipient_after_ledger_debit; transfer fee parser negatives | reverification.json: five native decreases/recipient exact fee equations; 4 CLOSED pools; 0 GEN native/locked/credits |
 
 ## Analogue and differentiation matrix
 

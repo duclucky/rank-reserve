@@ -1,5 +1,12 @@
 {
+  "command": "node scripts/diagnose-smoke.mjs",
+  "at": "2026-10-06T00:22:30.209Z",
+  "network": "Studio Dev",
+  "chainId": 61997,
+  "contractAddress": "0x5cE19ec2f4be4fdfE86D6Ea152396d8b1787e1Df",
+  "sourceSha256": "df134623c02c3e6757fbeb94daa4b6d1c8eeb619466c181d613c08601e12e838",
   "mode": "UNSIGNED_SIMULATION",
+  "explicitSimulationClock": false,
   "rpcErrorCode": -32000,
   "executionResult": "ERROR",
   "value": "2 GEN",
@@ -8,38 +15,21 @@
   ],
   "exceptionTypes": [],
   "sourceLines": [],
-  "errorFieldNames": [
-    "code",
-    "message",
-    "data"
-  ],
-  "errorDataFieldNames": [
-    "receipt",
-    "params"
-  ],
-  "receiptFieldNames": [
-    "vote",
-    "execution_result",
-    "result",
-    "calldata",
-    "gas_used",
-    "mode",
-    "contract_state",
-    "contract_state_hash",
-    "node_config",
-    "eq_outputs",
-    "pending_transactions",
-    "genvm_result",
-    "processing_time",
-    "nondet_disagree",
-    "execution_stats"
-  ],
   "runtimeCategories": [],
-  "accounting": {
-    "received": "0 GEN",
+  "accountingBefore": {
+    "received": "8 GEN",
     "locked": "0 GEN",
     "credits": "0 GEN",
-    "withdrawn": "0 GEN",
+    "withdrawn": "8 GEN",
+    "invariant": true
+  },
+  "nativeBefore": "0 GEN",
+  "noTransactionSubmitted": true,
+  "accounting": {
+    "received": "8 GEN",
+    "locked": "0 GEN",
+    "credits": "0 GEN",
+    "withdrawn": "8 GEN",
     "invariant": true
   },
   "nativeBalance": "0 GEN"

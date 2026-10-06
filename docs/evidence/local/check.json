@@ -1,0 +1,21 @@
+{
+  "command": "npm run check",
+  "capturedBy": "node .local/capture-local.mjs",
+  "at": "2026-10-06T00:23:35.446Z",
+  "exitCode": 0,
+  "pythonTests": 91,
+  "nodeTests": 17,
+  "totalTests": 108,
+  "output": [
+    "✓ Lint passed (3 checks)",
+    "✓ Validation passed",
+    "  Contract: RankReserve",
+    "  Methods: 12 (6 view, 6 write)",
+    "91 passed in 8.63s",
+    "ℹ tests 17",
+    "ℹ pass 17",
+    "ℹ fail 0",
+    "ℹ skipped 0",
+    "CHECK_PASS: semantic lint, ASCII/header/metadata, direct tests and deployment parser"
+  ]
+}

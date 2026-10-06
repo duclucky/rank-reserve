@@ -1,0 +1,682 @@
+{
+  "command": "node scripts/lifecycle.mjs",
+  "checkedAt": "2026-10-06T00:18:37.679Z",
+  "network": "Studio Dev",
+  "chainId": 61997,
+  "contractAddress": "0x5cE19ec2f4be4fdfE86D6Ea152396d8b1787e1Df",
+  "sourceSha256": "df134623c02c3e6757fbeb94daa4b6d1c8eeb619466c181d613c08601e12e838",
+  "roles": {
+    "sponsor": "0xC495ef51618D03267A1f227aFe5b27B38c748272",
+    "alice": "0x45aD397c438397A702B53a7499a78D08961D39Db",
+    "bob": "0x45248be151F7f7e230150db23774733Cd966Eb45"
+  },
+  "reservePerCase": "2 GEN",
+  "pools": {
+    "senior": {
+      "id": "rr-463918c-senior",
+      "withdrawals": {
+        "alice": {
+          "amount": "2 GEN",
+          "nativeBefore": "2 GEN",
+          "recipientBefore": "18.659083637166641533 GEN",
+          "recipient": "0x45aD397c438397A702B53a7499a78D08961D39Db",
+          "complete": true,
+          "nativeAfter": "0 GEN",
+          "nativeDecrease": "2 GEN",
+          "recipientAfter": "20.65895733091664071 GEN",
+          "recipientNetIncrease": "1.999873693749999177 GEN",
+          "feeDeposit": "0.001212529200052352 GEN",
+          "observedRecipientTransferCost": "0.000126306250000823 GEN",
+          "parentReceipt": {
+            "role": "alice",
+            "method": "withdraw_credit",
+            "feeDeposit": "0.001212529200052352 GEN",
+            "transactionHash": "0x2a81464cee8201c8b56728fd9e5ed27775a0367885dd81c2cc0e64f99c6e5d42",
+            "contractAddress": "0x5cE19ec2f4be4fdfE86D6Ea152396d8b1787e1Df",
+            "status": "FINALIZED",
+            "executionResult": "SUCCESS"
+          },
+          "externalMessage": {
+            "recipient": "0x45aD397c438397A702B53a7499a78D08961D39Db",
+            "value": "2 GEN"
+          },
+          "childReceipts": [],
+          "childBoundary": "Studio external native transfer executed within parent; no triggered child transaction reported",
+          "creditAfter": "0 GEN",
+          "checkedAt": "2026-10-06T00:00:18.001Z"
+        }
+      },
+      "ratifyDeadline": 1791248190,
+      "reviewDeadline": 1791251790,
+      "judgment": {
+        "id": "rr-463918c-senior:1",
+        "requester": "0xc495ef51618d03267a1f227afe5b27b38c748272",
+        "timestamp": 1791244725,
+        "definition_digest": "114f93b90ef55de5562e42ea3f3f2a7668c770f67d74b9fc61786cfab55e0e44",
+        "classes": {
+          "rr-463918c-senior:0": "PRIORITY",
+          "rr-463918c-senior:1": "STANDARD"
+        },
+        "unverifiable": false
+      },
+      "claims": [
+        {
+          "id": "rr-463918c-senior:0",
+          "payee": "0x45ad397c438397a702b53a7499a78d08961d39db",
+          "scope": "Undertakes to restore the unavailable production authentication service.",
+          "face": "2 GEN",
+          "ratified": true,
+          "class": "PRIORITY",
+          "allocated": "2 GEN"
+        },
+        {
+          "id": "rr-463918c-senior:1",
+          "payee": "0x45248be151f7f7e230150db23774733cd966eb45",
+          "scope": "Undertakes to add optional dashboard themes.",
+          "face": "2 GEN",
+          "ratified": true,
+          "class": "STANDARD",
+          "allocated": "0 GEN"
+        }
+      ],
+      "afterReview": {
+        "id": "rr-463918c-senior",
+        "version": "RR_V1",
+        "sponsor": "0xc495ef51618d03267a1f227afe5b27b38c748272",
+        "charter": "Restoring an unavailable existing production service is PRIORITY. Adding optional new features is STANDARD. Insufficient or conflicting descriptions are UNVERIFIABLE.",
+        "definition_digest": "114f93b90ef55de5562e42ea3f3f2a7668c770f67d74b9fc61786cfab55e0e44",
+        "ratify_deadline": 1791248190,
+        "review_deadline": 1791251790,
+        "count": 2,
+        "ratified": 2,
+        "attempts": 1,
+        "phase": "SETTLED",
+        "received": "2 GEN",
+        "locked": "0 GEN",
+        "credits": "2 GEN",
+        "withdrawn": "0 GEN"
+      },
+      "consensus": {
+        "leaderOnly": false,
+        "initialValidators": 5,
+        "result": "MAJORITY_AGREE"
+      },
+      "finalPool": {
+        "id": "rr-463918c-senior",
+        "version": "RR_V1",
+        "sponsor": "0xc495ef51618d03267a1f227afe5b27b38c748272",
+        "charter": "Restoring an unavailable existing production service is PRIORITY. Adding optional new features is STANDARD. Insufficient or conflicting descriptions are UNVERIFIABLE.",
+        "definition_digest": "114f93b90ef55de5562e42ea3f3f2a7668c770f67d74b9fc61786cfab55e0e44",
+        "ratify_deadline": 1791248190,
+        "review_deadline": 1791251790,
+        "count": 2,
+        "ratified": 2,
+        "attempts": 1,
+        "phase": "CLOSED",
+        "received": "2 GEN",
+        "locked": "0 GEN",
+        "credits": "0 GEN",
+        "withdrawn": "2 GEN"
+      }
+    },
+    "equal": {
+      "id": "rr-463918c-equal",
+      "withdrawals": {
+        "alice": {
+          "amount": "1 GEN",
+          "nativeBefore": "2 GEN",
+          "recipientBefore": "20.658878701916639887 GEN",
+          "recipient": "0x45aD397c438397A702B53a7499a78D08961D39Db",
+          "complete": true,
+          "nativeAfter": "1 GEN",
+          "nativeDecrease": "1 GEN",
+          "recipientAfter": "21.658752395666639064 GEN",
+          "recipientNetIncrease": "0.999873693749999177 GEN",
+          "feeDeposit": "0.001212529200052352 GEN",
+          "observedRecipientTransferCost": "0.000126306250000823 GEN",
+          "parentReceipt": {
+            "role": "alice",
+            "method": "withdraw_credit",
+            "feeDeposit": "0.001212529200052352 GEN",
+            "transactionHash": "0xf73d756c9a7e8938537eaf90eb77dc7003d8b8532f7b3f6e042de2db7f442a37",
+            "contractAddress": "0x5cE19ec2f4be4fdfE86D6Ea152396d8b1787e1Df",
+            "status": "FINALIZED",
+            "executionResult": "SUCCESS"
+          },
+          "externalMessage": {
+            "recipient": "0x45aD397c438397A702B53a7499a78D08961D39Db",
+            "value": "1 GEN"
+          },
+          "childReceipts": [],
+          "childBoundary": "Studio external native transfer executed within parent; no triggered child transaction reported",
+          "creditAfter": "0 GEN",
+          "checkedAt": "2026-10-06T00:05:31.782Z"
+        },
+        "bob": {
+          "amount": "1 GEN",
+          "nativeBefore": "1 GEN",
+          "recipientBefore": "1.996538520200012848 GEN",
+          "recipient": "0x45248be151F7f7e230150db23774733Cd966Eb45",
+          "complete": true,
+          "nativeAfter": "0 GEN",
+          "nativeDecrease": "1 GEN",
+          "recipientAfter": "2.996412213950012025 GEN",
+          "recipientNetIncrease": "0.999873693749999177 GEN",
+          "feeDeposit": "0.001212529200052352 GEN",
+          "observedRecipientTransferCost": "0.000126306250000823 GEN",
+          "parentReceipt": {
+            "role": "bob",
+            "method": "withdraw_credit",
+            "feeDeposit": "0.001212529200052352 GEN",
+            "transactionHash": "0xdbdd99b43df48e840abdbe244bfb8cd0027fa3bf190f1777bcc2b0b0cccc53c4",
+            "contractAddress": "0x5cE19ec2f4be4fdfE86D6Ea152396d8b1787e1Df",
+            "status": "FINALIZED",
+            "executionResult": "SUCCESS"
+          },
+          "externalMessage": {
+            "recipient": "0x45248be151F7f7e230150db23774733Cd966Eb45",
+            "value": "1 GEN"
+          },
+          "childReceipts": [],
+          "childBoundary": "Studio external native transfer executed within parent; no triggered child transaction reported",
+          "creditAfter": "0 GEN",
+          "checkedAt": "2026-10-06T00:06:14.455Z"
+        }
+      },
+      "ratifyDeadline": 1791248460,
+      "reviewDeadline": 1791252060,
+      "judgment": {
+        "id": "rr-463918c-equal:1",
+        "requester": "0xc495ef51618d03267a1f227afe5b27b38c748272",
+        "timestamp": 1791245023,
+        "definition_digest": "db910495b238eb0309a74c09ba6f369dc300fb6363cc727808b04abcc24ed744",
+        "classes": {
+          "rr-463918c-equal:0": "PRIORITY",
+          "rr-463918c-equal:1": "PRIORITY"
+        },
+        "unverifiable": false
+      },
+      "claims": [
+        {
+          "id": "rr-463918c-equal:0",
+          "payee": "0x45ad397c438397a702b53a7499a78d08961d39db",
+          "scope": "Undertakes to restore the unavailable production authentication service.",
+          "face": "2 GEN",
+          "ratified": true,
+          "class": "PRIORITY",
+          "allocated": "1 GEN"
+        },
+        {
+          "id": "rr-463918c-equal:1",
+          "payee": "0x45248be151f7f7e230150db23774733cd966eb45",
+          "scope": "Undertakes to recover the unavailable existing production data-access service.",
+          "face": "2 GEN",
+          "ratified": true,
+          "class": "PRIORITY",
+          "allocated": "1 GEN"
+        }
+      ],
+      "afterReview": {
+        "id": "rr-463918c-equal",
+        "version": "RR_V1",
+        "sponsor": "0xc495ef51618d03267a1f227afe5b27b38c748272",
+        "charter": "Restoring an unavailable existing production service is PRIORITY. Adding optional new features is STANDARD. Insufficient or conflicting descriptions are UNVERIFIABLE.",
+        "definition_digest": "db910495b238eb0309a74c09ba6f369dc300fb6363cc727808b04abcc24ed744",
+        "ratify_deadline": 1791248460,
+        "review_deadline": 1791252060,
+        "count": 2,
+        "ratified": 2,
+        "attempts": 1,
+        "phase": "SETTLED",
+        "received": "2 GEN",
+        "locked": "0 GEN",
+        "credits": "2 GEN",
+        "withdrawn": "0 GEN"
+      },
+      "consensus": {
+        "leaderOnly": false,
+        "initialValidators": 5,
+        "result": "MAJORITY_AGREE"
+      },
+      "finalPool": {
+        "id": "rr-463918c-equal",
+        "version": "RR_V1",
+        "sponsor": "0xc495ef51618d03267a1f227afe5b27b38c748272",
+        "charter": "Restoring an unavailable existing production service is PRIORITY. Adding optional new features is STANDARD. Insufficient or conflicting descriptions are UNVERIFIABLE.",
+        "definition_digest": "db910495b238eb0309a74c09ba6f369dc300fb6363cc727808b04abcc24ed744",
+        "ratify_deadline": 1791248460,
+        "review_deadline": 1791252060,
+        "count": 2,
+        "ratified": 2,
+        "attempts": 1,
+        "phase": "CLOSED",
+        "received": "2 GEN",
+        "locked": "0 GEN",
+        "credits": "0 GEN",
+        "withdrawn": "2 GEN"
+      }
+    },
+    "expiry": {
+      "id": "rr-463918c-expiry",
+      "withdrawals": {
+        "sponsor": {
+          "amount": "2 GEN",
+          "nativeBefore": "2 GEN",
+          "recipientBefore": "47.288223301332892037 GEN",
+          "recipient": "0xC495ef51618D03267A1f227aFe5b27B38c748272",
+          "complete": true,
+          "nativeAfter": "0 GEN",
+          "nativeDecrease": "2 GEN",
+          "recipientAfter": "49.288096995082891214 GEN",
+          "recipientNetIncrease": "1.999873693749999177 GEN",
+          "feeDeposit": "0.001212529200052352 GEN",
+          "observedRecipientTransferCost": "0.000126306250000823 GEN",
+          "parentReceipt": {
+            "role": "sponsor",
+            "method": "withdraw_credit",
+            "feeDeposit": "0.001212529200052352 GEN",
+            "transactionHash": "0xa5066eea271f97b7d88bff68589e2ea3b61d570231f14f3eeb1b9d3ef65ccbef",
+            "contractAddress": "0x5cE19ec2f4be4fdfE86D6Ea152396d8b1787e1Df",
+            "status": "FINALIZED",
+            "executionResult": "SUCCESS"
+          },
+          "externalMessage": {
+            "recipient": "0xC495ef51618D03267A1f227aFe5b27B38c748272",
+            "value": "2 GEN"
+          },
+          "childReceipts": [],
+          "childBoundary": "Studio external native transfer executed within parent; no triggered child transaction reported",
+          "creditAfter": "0 GEN",
+          "checkedAt": "2026-10-06T00:09:31.894Z"
+        }
+      },
+      "ratifyDeadline": 1791245245,
+      "reviewDeadline": 1791245275,
+      "afterExpiry": {
+        "id": "rr-463918c-expiry",
+        "version": "RR_V1",
+        "sponsor": "0xc495ef51618d03267a1f227afe5b27b38c748272",
+        "charter": "Restoring an unavailable existing production service is PRIORITY. Adding optional new features is STANDARD. Insufficient or conflicting descriptions are UNVERIFIABLE.",
+        "definition_digest": "6ad2ab3b985b8f57b071572539bfbf0a80cf64555c1de901645db5aeba469e05",
+        "ratify_deadline": 1791245245,
+        "review_deadline": 1791245275,
+        "count": 2,
+        "ratified": 0,
+        "attempts": 0,
+        "phase": "REFUNDED",
+        "received": "2 GEN",
+        "locked": "0 GEN",
+        "credits": "2 GEN",
+        "withdrawn": "0 GEN"
+      },
+      "finalPool": {
+        "id": "rr-463918c-expiry",
+        "version": "RR_V1",
+        "sponsor": "0xc495ef51618d03267a1f227afe5b27b38c748272",
+        "charter": "Restoring an unavailable existing production service is PRIORITY. Adding optional new features is STANDARD. Insufficient or conflicting descriptions are UNVERIFIABLE.",
+        "definition_digest": "6ad2ab3b985b8f57b071572539bfbf0a80cf64555c1de901645db5aeba469e05",
+        "ratify_deadline": 1791245245,
+        "review_deadline": 1791245275,
+        "count": 2,
+        "ratified": 0,
+        "attempts": 0,
+        "phase": "CLOSED",
+        "received": "2 GEN",
+        "locked": "0 GEN",
+        "credits": "0 GEN",
+        "withdrawn": "2 GEN"
+      }
+    },
+    "unverifiable": {
+      "id": "rr-463918c-unverifiable",
+      "withdrawals": {
+        "sponsor": {
+          "amount": "2 GEN",
+          "nativeBefore": "2 GEN",
+          "recipientBefore": "47.287782302332887922 GEN",
+          "recipient": "0xC495ef51618D03267A1f227aFe5b27B38c748272",
+          "complete": true,
+          "nativeAfter": "0 GEN",
+          "nativeDecrease": "2 GEN",
+          "recipientAfter": "49.287655996082887099 GEN",
+          "recipientNetIncrease": "1.999873693749999177 GEN",
+          "feeDeposit": "0.001212529200052352 GEN",
+          "observedRecipientTransferCost": "0.000126306250000823 GEN",
+          "parentReceipt": {
+            "role": "sponsor",
+            "method": "withdraw_credit",
+            "feeDeposit": "0.001212529200052352 GEN",
+            "transactionHash": "0x9c9814ad2b7639cbffbbcb1707e61d5988cd00d09f567315b6fd748be12a7d8c",
+            "contractAddress": "0x5cE19ec2f4be4fdfE86D6Ea152396d8b1787e1Df",
+            "status": "FINALIZED",
+            "executionResult": "SUCCESS"
+          },
+          "externalMessage": {
+            "recipient": "0xC495ef51618D03267A1f227aFe5b27B38c748272",
+            "value": "2 GEN"
+          },
+          "childReceipts": [],
+          "childBoundary": "Studio external native transfer executed within parent; no triggered child transaction reported",
+          "creditAfter": "0 GEN",
+          "checkedAt": "2026-10-06T00:17:55.843Z"
+        }
+      },
+      "ratifyDeadline": 1791245652,
+      "reviewDeadline": 1791245772,
+      "judgment": {
+        "id": "rr-463918c-unverifiable:1",
+        "requester": "0xc495ef51618d03267a1f227afe5b27b38c748272",
+        "timestamp": 1791245555,
+        "definition_digest": "011041f352a9e109e9e2ec5a961b878c4a0690ef36c403e9557139e38ff15ee5",
+        "classes": {
+          "rr-463918c-unverifiable:0": "UNVERIFIABLE",
+          "rr-463918c-unverifiable:1": "STANDARD"
+        },
+        "unverifiable": true
+      },
+      "claims": [
+        {
+          "id": "rr-463918c-unverifiable:0",
+          "payee": "0x45ad397c438397a702b53a7499a78d08961d39db",
+          "scope": "Undertakes to do the unspecified activity in an absent annex; its content is unknown.",
+          "face": "2 GEN",
+          "ratified": true,
+          "class": "PENDING",
+          "allocated": "0 GEN"
+        },
+        {
+          "id": "rr-463918c-unverifiable:1",
+          "payee": "0x45248be151f7f7e230150db23774733cd966eb45",
+          "scope": "Undertakes to add optional dashboard themes.",
+          "face": "2 GEN",
+          "ratified": true,
+          "class": "PENDING",
+          "allocated": "0 GEN"
+        }
+      ],
+      "afterReview": {
+        "id": "rr-463918c-unverifiable",
+        "version": "RR_V1",
+        "sponsor": "0xc495ef51618d03267a1f227afe5b27b38c748272",
+        "charter": "Restoring an unavailable existing production service is PRIORITY. Adding optional new features is STANDARD. Insufficient or conflicting descriptions are UNVERIFIABLE.",
+        "definition_digest": "011041f352a9e109e9e2ec5a961b878c4a0690ef36c403e9557139e38ff15ee5",
+        "ratify_deadline": 1791245652,
+        "review_deadline": 1791245772,
+        "count": 2,
+        "ratified": 2,
+        "attempts": 1,
+        "phase": "RETRYABLE",
+        "received": "2 GEN",
+        "locked": "2 GEN",
+        "credits": "0 GEN",
+        "withdrawn": "0 GEN"
+      },
+      "consensus": {
+        "leaderOnly": false,
+        "initialValidators": 5,
+        "result": "MAJORITY_AGREE"
+      },
+      "afterExpiry": {
+        "id": "rr-463918c-unverifiable",
+        "version": "RR_V1",
+        "sponsor": "0xc495ef51618d03267a1f227afe5b27b38c748272",
+        "charter": "Restoring an unavailable existing production service is PRIORITY. Adding optional new features is STANDARD. Insufficient or conflicting descriptions are UNVERIFIABLE.",
+        "definition_digest": "011041f352a9e109e9e2ec5a961b878c4a0690ef36c403e9557139e38ff15ee5",
+        "ratify_deadline": 1791245652,
+        "review_deadline": 1791245772,
+        "count": 2,
+        "ratified": 2,
+        "attempts": 1,
+        "phase": "REFUNDED",
+        "received": "2 GEN",
+        "locked": "0 GEN",
+        "credits": "2 GEN",
+        "withdrawn": "0 GEN"
+      },
+      "finalPool": {
+        "id": "rr-463918c-unverifiable",
+        "version": "RR_V1",
+        "sponsor": "0xc495ef51618d03267a1f227afe5b27b38c748272",
+        "charter": "Restoring an unavailable existing production service is PRIORITY. Adding optional new features is STANDARD. Insufficient or conflicting descriptions are UNVERIFIABLE.",
+        "definition_digest": "011041f352a9e109e9e2ec5a961b878c4a0690ef36c403e9557139e38ff15ee5",
+        "ratify_deadline": 1791245652,
+        "review_deadline": 1791245772,
+        "count": 2,
+        "ratified": 2,
+        "attempts": 1,
+        "phase": "CLOSED",
+        "received": "2 GEN",
+        "locked": "0 GEN",
+        "credits": "0 GEN",
+        "withdrawn": "2 GEN"
+      }
+    }
+  },
+  "transactions": {
+    "senior:create": {
+      "role": "sponsor",
+      "method": "create_pool",
+      "feeDeposit": "0.000754882800010352 GEN",
+      "transactionHash": "0x08ca4b2d72ffbbfc2be10d0776a932c5b426bc722cd17c627d22d5f7404a455a",
+      "contractAddress": "0x5cE19ec2f4be4fdfE86D6Ea152396d8b1787e1Df",
+      "status": "FINALIZED",
+      "executionResult": "SUCCESS"
+    },
+    "senior:ratify:alice": {
+      "role": "alice",
+      "method": "ratify_claim",
+      "feeDeposit": "0.000754832400010352 GEN",
+      "transactionHash": "0xde81ecf5a13004d53053294233580d8f8e7f941406e47b80390ff4518435875c",
+      "contractAddress": "0x5cE19ec2f4be4fdfE86D6Ea152396d8b1787e1Df",
+      "status": "FINALIZED",
+      "executionResult": "SUCCESS"
+    },
+    "senior:ratify:bob": {
+      "role": "bob",
+      "method": "ratify_claim",
+      "feeDeposit": "0.000754833600010352 GEN",
+      "transactionHash": "0xa549399ec44f52f416577eb04a98938da2287653a38c12fe3897b4ed14e4cdca",
+      "contractAddress": "0x5cE19ec2f4be4fdfE86D6Ea152396d8b1787e1Df",
+      "status": "FINALIZED",
+      "executionResult": "SUCCESS"
+    },
+    "senior:review": {
+      "role": "sponsor",
+      "method": "review_pool",
+      "feeDeposit": "0.000756254400010352 GEN",
+      "transactionHash": "0xca5f93f15c0d4157bd3fb2552e4541b9aded0fc514916f9ffe047b281495f71b",
+      "contractAddress": "0x5cE19ec2f4be4fdfE86D6Ea152396d8b1787e1Df",
+      "status": "FINALIZED",
+      "executionResult": "SUCCESS"
+    },
+    "senior:withdraw:alice": {
+      "role": "alice",
+      "method": "withdraw_credit",
+      "feeDeposit": "0.001212529200052352 GEN",
+      "transactionHash": "0x2a81464cee8201c8b56728fd9e5ed27775a0367885dd81c2cc0e64f99c6e5d42",
+      "contractAddress": "0x5cE19ec2f4be4fdfE86D6Ea152396d8b1787e1Df",
+      "status": "FINALIZED",
+      "executionResult": "SUCCESS"
+    },
+    "senior:close": {
+      "role": "sponsor",
+      "method": "close_pool",
+      "feeDeposit": "0.000754831200010352 GEN",
+      "transactionHash": "0x278dbd1a6105486ada692942d75217055685b56601f2119db195ed83c3d77c9e",
+      "contractAddress": "0x5cE19ec2f4be4fdfE86D6Ea152396d8b1787e1Df",
+      "status": "FINALIZED",
+      "executionResult": "SUCCESS"
+    },
+    "equal:create": {
+      "role": "sponsor",
+      "method": "create_pool",
+      "feeDeposit": "0.000754886400010352 GEN",
+      "transactionHash": "0x727f0755758c13b2c948b357f20c3b698c990fd2b5803226041f4f3c4cf5c2bd",
+      "contractAddress": "0x5cE19ec2f4be4fdfE86D6Ea152396d8b1787e1Df",
+      "status": "FINALIZED",
+      "executionResult": "SUCCESS"
+    },
+    "equal:ratify:alice": {
+      "role": "alice",
+      "method": "ratify_claim",
+      "feeDeposit": "0.000754833600010352 GEN",
+      "transactionHash": "0x19b5b7e5d2bb1b868fb18cdb9b832fd3222259a3ead6b2f85435aac60e70e0af",
+      "contractAddress": "0x5cE19ec2f4be4fdfE86D6Ea152396d8b1787e1Df",
+      "status": "FINALIZED",
+      "executionResult": "SUCCESS"
+    },
+    "equal:ratify:bob": {
+      "role": "bob",
+      "method": "ratify_claim",
+      "feeDeposit": "0.000754834800010352 GEN",
+      "transactionHash": "0x3a0789af250f3a46b5e89813ef4d63f4d30697cde304a3e85bc2ad635bfee6ca",
+      "contractAddress": "0x5cE19ec2f4be4fdfE86D6Ea152396d8b1787e1Df",
+      "status": "FINALIZED",
+      "executionResult": "SUCCESS"
+    },
+    "equal:review": {
+      "role": "sponsor",
+      "method": "review_pool",
+      "feeDeposit": "0.000756255600010352 GEN",
+      "transactionHash": "0x05e9a383d496d7119669915675b54fad2a1babe7c137659c14a3d5e3e78e0787",
+      "contractAddress": "0x5cE19ec2f4be4fdfE86D6Ea152396d8b1787e1Df",
+      "status": "FINALIZED",
+      "executionResult": "SUCCESS"
+    },
+    "equal:withdraw:alice": {
+      "role": "alice",
+      "method": "withdraw_credit",
+      "feeDeposit": "0.001212529200052352 GEN",
+      "transactionHash": "0xf73d756c9a7e8938537eaf90eb77dc7003d8b8532f7b3f6e042de2db7f442a37",
+      "contractAddress": "0x5cE19ec2f4be4fdfE86D6Ea152396d8b1787e1Df",
+      "status": "FINALIZED",
+      "executionResult": "SUCCESS"
+    },
+    "equal:withdraw:bob": {
+      "role": "bob",
+      "method": "withdraw_credit",
+      "feeDeposit": "0.001212529200052352 GEN",
+      "transactionHash": "0xdbdd99b43df48e840abdbe244bfb8cd0027fa3bf190f1777bcc2b0b0cccc53c4",
+      "contractAddress": "0x5cE19ec2f4be4fdfE86D6Ea152396d8b1787e1Df",
+      "status": "FINALIZED",
+      "executionResult": "SUCCESS"
+    },
+    "equal:close": {
+      "role": "sponsor",
+      "method": "close_pool",
+      "feeDeposit": "0.000754831200010352 GEN",
+      "transactionHash": "0xf3e31729b781f479179ba1759bbfdc3b3880eaf6536e2a92e5140721e0858b7c",
+      "contractAddress": "0x5cE19ec2f4be4fdfE86D6Ea152396d8b1787e1Df",
+      "status": "FINALIZED",
+      "executionResult": "SUCCESS"
+    },
+    "expiry:create": {
+      "role": "sponsor",
+      "method": "create_pool",
+      "feeDeposit": "0.000754887600010352 GEN",
+      "transactionHash": "0xcb3e76cf63f93530713468b872f4fef6e2f92d654d12474fd538c1a57d181ec8",
+      "contractAddress": "0x5cE19ec2f4be4fdfE86D6Ea152396d8b1787e1Df",
+      "status": "FINALIZED",
+      "executionResult": "SUCCESS"
+    },
+    "expiry:expire": {
+      "role": "sponsor",
+      "method": "expire_pool",
+      "feeDeposit": "0.000754845600010352 GEN",
+      "transactionHash": "0x275a501d57041cf5f5a40022d038c8e5c3c47e84e640e45c28b18e03243f8d6d",
+      "contractAddress": "0x5cE19ec2f4be4fdfE86D6Ea152396d8b1787e1Df",
+      "status": "FINALIZED",
+      "executionResult": "SUCCESS"
+    },
+    "expiry:withdraw:sponsor": {
+      "role": "sponsor",
+      "method": "withdraw_credit",
+      "feeDeposit": "0.001212529200052352 GEN",
+      "transactionHash": "0xa5066eea271f97b7d88bff68589e2ea3b61d570231f14f3eeb1b9d3ef65ccbef",
+      "contractAddress": "0x5cE19ec2f4be4fdfE86D6Ea152396d8b1787e1Df",
+      "status": "FINALIZED",
+      "executionResult": "SUCCESS"
+    },
+    "expiry:close": {
+      "role": "sponsor",
+      "method": "close_pool",
+      "feeDeposit": "0.000754831200010352 GEN",
+      "transactionHash": "0xd8856bcc8b2e363ea53e4f27f101491d17bf9cf14b34f5194c710a71301f87ec",
+      "contractAddress": "0x5cE19ec2f4be4fdfE86D6Ea152396d8b1787e1Df",
+      "status": "FINALIZED",
+      "executionResult": "SUCCESS"
+    },
+    "unverifiable:create": {
+      "role": "sponsor",
+      "method": "create_pool",
+      "feeDeposit": "0.000754890000010352 GEN",
+      "transactionHash": "0x576dc148532e53250702db31b977092380dc06adfa04e511d7bde59833b9aeac",
+      "contractAddress": "0x5cE19ec2f4be4fdfE86D6Ea152396d8b1787e1Df",
+      "status": "FINALIZED",
+      "executionResult": "SUCCESS"
+    },
+    "unverifiable:ratify:alice": {
+      "role": "alice",
+      "method": "ratify_claim",
+      "feeDeposit": "0.000754833600010352 GEN",
+      "transactionHash": "0x34282165498a357753cdafaa7e19f4f91c5e63858649530faa8b7bb20c467938",
+      "contractAddress": "0x5cE19ec2f4be4fdfE86D6Ea152396d8b1787e1Df",
+      "status": "FINALIZED",
+      "executionResult": "SUCCESS"
+    },
+    "unverifiable:ratify:bob": {
+      "role": "bob",
+      "method": "ratify_claim",
+      "feeDeposit": "0.000754834800010352 GEN",
+      "transactionHash": "0x3720e1fa22d78977e40d3f4c5edcc24d594f31dbd45e8c299522ca3ecf7c801d",
+      "contractAddress": "0x5cE19ec2f4be4fdfE86D6Ea152396d8b1787e1Df",
+      "status": "FINALIZED",
+      "executionResult": "SUCCESS"
+    },
+    "unverifiable:review": {
+      "role": "sponsor",
+      "method": "review_pool",
+      "feeDeposit": "0.000756382800010352 GEN",
+      "transactionHash": "0xa3cf804d16f77b258bf8bc87bf012aad03fcc91e787ee1016b8cd2e3323fe673",
+      "contractAddress": "0x5cE19ec2f4be4fdfE86D6Ea152396d8b1787e1Df",
+      "status": "FINALIZED",
+      "executionResult": "SUCCESS"
+    },
+    "unverifiable:expire": {
+      "role": "sponsor",
+      "method": "expire_pool",
+      "feeDeposit": "0.000754846800010352 GEN",
+      "transactionHash": "0xc12d3b51e0d3ea45a018bdb499881c3908ca6263ed2a69a5553a1b60d779f9ea",
+      "contractAddress": "0x5cE19ec2f4be4fdfE86D6Ea152396d8b1787e1Df",
+      "status": "FINALIZED",
+      "executionResult": "SUCCESS"
+    },
+    "unverifiable:withdraw:sponsor": {
+      "role": "sponsor",
+      "method": "withdraw_credit",
+      "feeDeposit": "0.001212529200052352 GEN",
+      "transactionHash": "0x9c9814ad2b7639cbffbbcb1707e61d5988cd00d09f567315b6fd748be12a7d8c",
+      "contractAddress": "0x5cE19ec2f4be4fdfE86D6Ea152396d8b1787e1Df",
+      "status": "FINALIZED",
+      "executionResult": "SUCCESS"
+    },
+    "unverifiable:close": {
+      "role": "sponsor",
+      "method": "close_pool",
+      "feeDeposit": "0.000754831200010352 GEN",
+      "transactionHash": "0x457f08279dd9e6e242256edae1e655da8928a084cae9ae27c21c4709d2467383",
+      "contractAddress": "0x5cE19ec2f4be4fdfE86D6Ea152396d8b1787e1Df",
+      "status": "FINALIZED",
+      "executionResult": "SUCCESS"
+    }
+  },
+  "accounting": {
+    "received": "8 GEN",
+    "locked": "0 GEN",
+    "credits": "0 GEN",
+    "withdrawn": "8 GEN",
+    "invariant": true
+  },
+  "nativeBalance": "0 GEN",
+  "evidenceIsSanitized": true
+}

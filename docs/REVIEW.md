@@ -1,8 +1,9 @@
-# Independent contract review
+# Contract review and limits
 
 Scope: one reusable reserve/judgment/accounting primitive; no application.
 Review is based on the current exact contract, direct tests and target runtime
-smoke. Final lifecycle and submission findings remain pending until verified.
+smoke and finalized lifecycle. All mandatory technical findings below pass.
+Public repository, CI and final submission checks are verified separately.
 
 | Criterion | Finding | Evidence |
 | --- | --- | --- |
@@ -12,21 +13,35 @@ smoke. Final lifecycle and submission findings remain pending until verified.
 | Settlement invariants | Exact ID coverage/enums before mutation; deterministic tier budget, face caps and residual destination | _normalize/_waterfall; malformed, duplicate, injection and proportional tests |
 | Entry-local time guards | create/ratify/review/expire each checks transaction time independently of phase; equality is late for ratify/review | temporal boundary tests with stale phase; AST checks |
 | Recovery and accounting | Pending expiry refunds sponsor; only own terminal credit can withdraw; close requires zero liabilities | safety matrix tests, refund-withdraw-close and invariant corruption tests |
-| Transfer boundary | EVM proxy emits exact credit after debit; native proof is additionally required | test_withdraw_emits_exact_evm_recipient_after_ledger_debit; live proof pending |
+| Transfer boundary | EVM proxy emits exact credit after debit; five real native decreases and recipient/fee equations pass | test_withdraw_emits_exact_evm_recipient_after_ledger_debit; reverification.json |
 | Reuse and novelty | Generic isolated pools and canonical views for three proposed coordinators; reserve priority differs from debt netting, bid selection and capability grants | API and analogue matrix in specification |
 | Honest limits | Promises define future payment rights; no external delivery/debt/legal/adoption guarantee | README and scope policy |
 
 Safe improvements applied: raw text JSON preserves duplicate-key detection;
 noncritical reasons are discarded; receipt projection handles raw and normalized
 SDK enums; negative coverage includes outsiders, terminal states, corrupt
-accounting and the seven-day bound. No public contract behavior was changed during
-the review criteria and no rule or grading implementation was weakened. During
+accounting and the seven-day bound. No rule or grading implementation was weakened. During
 live validation, an underspecified output instruction produced nested class
 objects. The strict parser rejected them before mutation. The prompt now states
 that every mapping value is a plain enum string and reason is top-level only;
 public semantics, schema and payout rules are unchanged. Three additional
 malformed-output cases preserve rejection. The old revision was fully recovered
-and archived; the replacement must independently pass its full lifecycle.
+and archived. The replacement independently passed all four lifecycle/recovery
+cases, 25 finalized successful receipts and five exact value exits, with zero
+remaining liabilities and native GEN.
+
+Runtime metadata recognizes only create_pool as payable. An unsigned 1 GEN
+ratify_claim probe rejects as nonpayable, with no canonical mutation. External
+native transfers report no triggered child; exact parent message, native decrease,
+recipient balance and settled fee records prove delivery. Studio separately pays
+unused external message reservation to the payer; verification reconciles that
+explicit payout with no tolerance. Five parser tests reject missing, malformed,
+unsettled or excess fee evidence. No automatic compensation for failed emitted
+transfers and no production security certification are claimed.
+
+Minimal safe improvement in this review: diagnostic snapshots now bind the active
+chain, address, source hash and time, and verify unchanged canonical balances.
+No public API, semantic rule or payout behavior changed in Phase 8.
 
 Tooling issue diagnosed with a controlled unsigned comparison: the default Studio
 write simulation returns invalid future deadlines; the identical call with explicit

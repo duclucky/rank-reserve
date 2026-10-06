@@ -1,4 +1,10 @@
 {
+  "command": "node scripts/diagnose-smoke.mjs --explicit-simulation-clock",
+  "at": "2026-10-06T00:22:37.196Z",
+  "network": "Studio Dev",
+  "chainId": 61997,
+  "contractAddress": "0x5cE19ec2f4be4fdfE86D6Ea152396d8b1787e1Df",
+  "sourceSha256": "df134623c02c3e6757fbeb94daa4b6d1c8eeb619466c181d613c08601e12e838",
   "mode": "UNSIGNED_SIMULATION",
   "explicitSimulationClock": true,
   "rpcErrorCode": null,
@@ -7,15 +13,21 @@
   "contractErrors": [],
   "exceptionTypes": [],
   "sourceLines": [],
-  "errorFieldNames": [],
-  "errorDataFieldNames": [],
-  "receiptFieldNames": [],
   "runtimeCategories": [],
-  "accounting": {
-    "received": "0 GEN",
+  "accountingBefore": {
+    "received": "8 GEN",
     "locked": "0 GEN",
     "credits": "0 GEN",
-    "withdrawn": "0 GEN",
+    "withdrawn": "8 GEN",
+    "invariant": true
+  },
+  "nativeBefore": "0 GEN",
+  "noTransactionSubmitted": true,
+  "accounting": {
+    "received": "8 GEN",
+    "locked": "0 GEN",
+    "credits": "0 GEN",
+    "withdrawn": "8 GEN",
     "invariant": true
   },
   "nativeBalance": "0 GEN"
