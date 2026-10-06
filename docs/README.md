@@ -4,7 +4,7 @@
 
 IDEA-038, RankReserve, rank-reserve, Intelligent Contracts. Status VALIDATED.
 Target Studio Dev, chain 61997, RPC https://studio-next.genlayer.com/api.
-Public repository PENDING_PUBLICATION. Real lifecycle PASS_EXECUTION.
+Public repository: https://github.com/duclucky/rank-reserve. Real lifecycle PASS_EXECUTION.
 No app or frontend. The contract owns judgment, accounting and enforcement.
 
 ## One-sentence product hook

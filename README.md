@@ -1,5 +1,8 @@
 # RankReserve
 
+[Repository](https://github.com/duclucky/rank-reserve) |
+[Contract verification CI](https://github.com/duclucky/rank-reserve/actions/workflows/check.yml)
+
 RankReserve distributes a scarce native GEN reserve among co-ratified future-payment
 promises. Independent validators interpret seniority under an immutable priority
 charter; deterministic code applies a face-capped proportional waterfall.
